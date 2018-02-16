@@ -17,3 +17,6 @@ RUN pip install --upgrade youtube-dl
 COPY get_audio.py /home/
 RUN mkdir /home/to-get-list
 RUN mkdir /home/gotten
+
+ENTRYPOINT ["/bin/ash"]
+COMMAND ["/home/get_audio.py"]

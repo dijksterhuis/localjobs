@@ -36,11 +36,13 @@ def run_speed_testing(servers = [] ):
     return s.results.dict()
     
     
-def run_test( results_output, results_file , servers = [], print_output = False ):
+def run_test( results_output, results_path , servers = [], print_output = False ):
     
     # ---- create results file + headers (with server name)
+
+    results_file = results_path + '/results.csv'
     
-    if results_file not in os.listdir():
+    if 'results.csv' not in os.listdir(results_path):
         with open(results_file, 'w') as tmp_f:
             tmp_f.write( csv_format_strings( results_output ) + '\n' )
     
@@ -68,9 +70,6 @@ if __name__ == '__main__':
     
     # TODO argparser
     
-    print('------------------------------------')
-    print('RUNNING SPEED TEST...')
-    
     # TODO test against multiple servers
     # - how to prepend server details to headers / results file
     
@@ -82,9 +81,6 @@ if __name__ == '__main__':
     
     # ---- simple run
     
-    results_output, results_file, servers = ['timestamp','download','upload','ping'], './results.csv', []
+    results_output, results_path, servers = ['timestamp','download','upload','ping'], '/Users/Mike/data/local-jobs/speedtesting', []
     
-    run_test(results_output, results_file, servers = servers, print_output = False)
-    
-    print('FINISHED SPEED TEST.')
-    print('------------------------------------')
+    run_test(results_output, results_path, servers = servers, print_output = False)
